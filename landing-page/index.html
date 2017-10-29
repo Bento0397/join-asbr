@@ -7,6 +7,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="js/main.js" type="text/javascript" ></script>
     </head>
     <body>
         <div class="container">
@@ -25,7 +26,7 @@
                     <form id="step_1" class="form-step">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <div class="panel-title">
+                                <div class="panel-title" >
                                     Preencha seus dados para receber contato
                                 </div>
                             </div>
@@ -34,24 +35,27 @@
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Nome Completo</label>
-                                            <input class="form-control" type="text" name="nome">
+                                            <input class="form-control" type="text" name="nome" id="nome" placeholder="Digite aqui seu nome" required>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <label>Data de Nascimento</label>
-                                            <input class="form-control" type="text" name="data_nascimento">
+                                             <!--
+                                                Utilizei patterns e placeholders para fazer a verificação por html e sugerir informações
+                                                -->
+                                            <input class="form-control" name="data_nascimento" id="data_nascimento" type="date" required="required" maxlength="10" name="date" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" min="1901-01-01" max="2016-01-01" />
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col-lg-6">
-                                            <label>Email</label>
-                                            <input class="form-control" type="text" name="email">
+                                            <label>email</label>
+                                            <input class="form-control" name="email" id="email" type="email" required="required" class="input-text"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="contato@email.com.br"/>
                                         </div>
 
                                         <div class="col-lg-6">
                                             <label>Telefone</label>
-                                            <input class="form-control" type="text" name="telefone">
+                                            <input class="form-control" name="telefone" id="telefone" type="tel" required="required" maxlength="15"  placeholder="(11) 91111-1111">
                                         </div>
                                     </div>
 
@@ -75,7 +79,7 @@
                                     <div class="row form-group">
                                         <div class="col-lg-6">
                                             <label>Região</label>
-                                            <select class="form-control" name="regiao">
+                                            <select class="form-control" name="regiao" id="regiao">
                                                 <option value="">Selecione a sua região</option>
                                                 <option>Sul</option>
                                                 <option>Sudeste</option>
@@ -87,7 +91,10 @@
 
                                         <div class="col-lg-6">
                                             <label>Unidade</label>
-                                            <select class="form-control" name="unidade">
+                                            <!--
+                                                O evento onChange chama uma função em main.Js para adicionar as opções de unidade de acordo com a região 
+                                            -->
+                                            <select class="form-control" name="unidade" id=" onChange="unidade(this.options[this.selectedIndex].value)">
                                                 <option value="">Selecione a unidade mais próxima</option>
                                                 <option>???</option>
                                             </select>
@@ -121,13 +128,5 @@
                 </div>
             </div>
         </div>
-        <script>
-            $(function () {
-                $('.next-step').click(function (event) {
-                    event.preventDefault();
-                    $(this).parents('.form-step').hide().next().show();
-                });
-            });
-        </script>
     </body>
 </html>
